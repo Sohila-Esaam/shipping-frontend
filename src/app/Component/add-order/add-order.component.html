@@ -1,0 +1,390 @@
+<div class="container p-3 my-3">
+  <h3 class="mb-3">إضافه طلب</h3>
+  <form action="" [formGroup]="orderForm" (ngSubmit)="order()">
+    <div class="row mb-lg-3">
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput1" class="form-label">النوع</label>
+        <select
+          class="form-select"
+          name="orderType"
+          formControlName="orderType"
+          aria-label="Default select example"
+        >
+          <option value="" selected disabled>حدد النوع</option>
+          <option value="1">التسليم فى أقرب الفرع</option>
+          <option value="2">التسليم من المتجر</option>
+        </select>
+        <div [hidden]="!orderType?.errors || orderType?.untouched">
+          <small class="text-danger" *ngIf="orderType?.errors?.['required']">
+            النوع مطلوب
+          </small>
+        </div>
+      </div>
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >إسم العميل</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput1"
+          name="clientName"
+          placeholder="الاسم"
+          formControlName="clientName"
+        />
+        <div [hidden]="!clientName?.errors || clientName?.untouched">
+          <small class="text-danger" *ngIf="clientName?.errors?.['required']"
+            >إسم العميل مطلوب</small
+          >
+        </div>
+      </div>
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >رقم الهاتف</label
+        >
+        <input
+          type="tel"
+          class="form-control"
+          id="exampleFormControlInput1"
+          name="firstPhoneNumber"
+          formControlName="firstPhoneNumber"
+        />
+        <div
+          [hidden]="!firstPhoneNumber?.errors || firstPhoneNumber?.untouched"
+        >
+          <small
+            class="text-danger"
+            *ngIf="firstPhoneNumber?.errors?.['pattern']"
+            >برجاء إدخال رقم مصرى</small
+          >
+          <small
+            class="text-danger"
+            *ngIf="firstPhoneNumber?.errors?.['required']"
+            >هاتف العميل مطلوب</small
+          >
+        </div>
+      </div>
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >2 رقم الهاتف</label
+        >
+        <input
+          type="tel"
+          class="form-control"
+          id="exampleFormControlInput1"
+          name="secondPhoneNumber"
+          formControlName="secondPhoneNumber"
+        />
+        <div
+          [hidden]="!secondPhoneNumber?.errors || secondPhoneNumber?.untouched"
+        >
+          <small
+            class="text-danger"
+            *ngIf="secondPhoneNumber?.errors?.['pattern']"
+            >برجاء إدخال رقم مصرى</small
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row mb-lg-3">
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >البريد الالكترونى</label
+        >
+        <input
+          type="email"
+          class="form-control"
+          id="exampleFormControlInput1"
+          name="email"
+          formControlName="email"
+        />
+        <div [hidden]="!email?.errors || email?.untouched">
+          <small class="text-danger" *ngIf="email?.errors?.['email']">
+            هذا البريد غير صالح
+          </small>
+          <small class="text-danger" *ngIf="email?.errors?.['required']">
+            البريد الالكترونى مطلوب
+          </small>
+        </div>
+      </div>
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput6" class="form-label">
+          المحافظة</label
+        >
+        <select
+          class="form-select"
+          name="governorateId"
+          formControlName="governorateId"
+          aria-label="Default select example"
+        >
+          <option value="" selected disabled>إختر محافظة</option>
+          <option value="{{ gover.id }}" *ngFor="let gover of governorates">
+            {{ gover.name }}
+          </option>
+        </select>
+        <div [hidden]="!governorateId?.errors || governorateId?.untouched">
+          <small class="text-danger" *ngIf="governorateId?.errors?.['required']"
+            >المحافظة مطلوبة</small
+          >
+        </div>
+      </div>
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput7" class="form-label">
+          المدينة</label
+        >
+        <select
+          class="form-select"
+          name="cityId"
+          formControlName="cityId"
+          aria-label="Default select example"
+        >
+          <option value="" selected disabled>إختر مدينة</option>
+          <option value="{{ city.id }}" *ngFor="let city of Cities">
+            {{ city.name }}
+          </option>
+        </select>
+        <div [hidden]="!cityId?.errors || cityId?.untouched">
+          <small class="text-danger" *ngIf="cityId?.errors?.['required']"
+            >المدينة مطلوبة</small
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row mb-lg-3">
+      <div class="mb-3 col-lg-4">
+        <label for="exampleFormControlInput1" class="form-label"
+          >القرية والشارع</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="القرية والشارع"
+          name="street"
+          formControlName="street"
+        />
+      </div>
+      <div class="col-lg-2">
+        <label for="exampleFormControlInput1" class="form-label"
+          >التوصيل للقرية؟</label
+        >
+        <div
+          class="form-check form-switch d-flex align-items-center justify-content-start"
+        >
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+            formControlName="deliverToVillage"
+          />
+        </div>
+      </div>
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >نوع الشحن</label
+        >
+        <select
+          class="form-select"
+          name="typeOfDelevery"
+          formControlName="typeOfDelevery"
+          aria-label="Default select example"
+        >
+          <option value="" selected disabled>إختر نوع الشحن</option>
+          <option value="1">شحن عادى</option>
+          <option value="2">شحن خلال 24 ساعه</option>
+          <option value="3">شحن خلال 15 يوم</option>
+        </select>
+        <div [hidden]="!typeOfDelevery?.errors || typeOfDelevery?.untouched">
+          <small
+            class="text-danger"
+            *ngIf="typeOfDelevery?.errors?.['required']"
+          >
+            نوع الشحن مطلوب
+          </small>
+        </div>
+      </div>
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >نوع الدفع</label
+        >
+        <select
+          class="form-select"
+          name="paymentType"
+          formControlName="paymentType"
+          aria-label="Default select example"
+        >
+          <option value="" selected disabled>إختر نوع الدفع</option>
+          <option value="1">دفع مقدم</option>
+          <option value="2">دفع عند التسليم</option>
+        </select>
+        <div [hidden]="!paymentType?.errors || paymentType?.untouched">
+          <small class="text-danger" *ngIf="paymentType?.errors?.['required']">
+            نوع الدفع مطلوب
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-lg-3">
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput8" class="form-label"> الفرع</label>
+        <select
+          class="form-select"
+          name="branchId"
+          formControlName="branchId"
+          aria-label="Default select example"
+        >
+          <option value="" disabled selected>اختر فرع</option>
+          <option
+            value="{{ i + 1 }}"
+            *ngFor="let branch of branches; let i = index"
+          >
+            {{ branch.name }}
+          </option>
+        </select>
+        <div [hidden]="!branchId?.errors || branchId?.untouched">
+          <small class="text-danger" *ngIf="branchId?.errors?.['required']"
+            >الفرع مطلوب</small
+          >
+        </div>
+      </div>
+    </div>
+    <div class="tableRes p-3 mb-lg-3 mb-1" style="border: 2px solid #eee">
+      <button
+        (click)="addRow()"
+        class="btn btn-primary mb-2"
+        style="width: fit-content; height: fit-content"
+      >
+        إضافه منتج
+      </button>
+      <table class="table table-bordered w-100">
+        <thead>
+          <tr class="table-secondary text-dark text-center">
+            <th scope="col">إسم المنتج</th>
+            <th scope="col">الكميه</th>
+            <th scope="col">الوزن</th>
+            <th scope="col">السعر</th>
+            <th scope="col">حذف</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="products">
+          <tr
+            *ngFor="let pro of products.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <td>
+              <input
+                placeholder="إسم المنتج"
+                type="text"
+                name="name"
+                class="w-100 p-1"
+                formControlName="name"
+              />
+            </td>
+            <td>
+              <input
+                placeholder="كمية المنتج"
+                type="number"
+                name="quantity"
+                class="w-100 p-1"
+                formControlName="quantity"
+              />
+            </td>
+            <td>
+              <input
+                placeholder="وزن المنتج"
+                type="number"
+                name="weight"
+                class="w-100 p-1"
+                formControlName="weight"
+              />
+            </td>
+            <td>
+              <input
+                placeholder="سعر المنتج"
+                type="number"
+                name="price"
+                class="w-100 p-1"
+                formControlName="price"
+              />
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="deleteRow(i)">حذف</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <small
+        [hidden]="!products.invalid || products.untouched"
+        class="text-danger"
+      >
+        المنتجات مطلوبة
+      </small>
+      <span class="text-danger">{{ error }}</span>
+    </div>
+
+    <div class="row mb-lg-3">
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >تكلفه الطلب</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="تكلفه الطلب"
+          name=""
+          formControlName=""
+        />
+      </div>
+      <div class="mb-3 col-lg-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >إجمالى الوزن</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="إجمالى الوزن"
+          name=""
+          formControlName=""
+        />
+      </div>
+      <div class="mb-3 col-lg-6 d-flex flex-column">
+        <label for="exampleFormControlInput1" class="form-label">ملاحظات</label>
+        <textarea name="notes" formControlName="notes" id="comments"></textarea>
+      </div>
+    </div>
+
+    <div class="p-3 mb-lg-3 mb-1" style="border: 2px solid #eee">
+      <h5>بيانات التاجر</h5>
+      <div class="row">
+        <div class="mb-3 col-lg-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >رقم الهاتف</label
+          >
+          <input
+            type="tel"
+            class="form-control"
+            id="exampleFormControlInput1"
+            name=""
+            formControlName="mphone"
+          />
+        </div>
+        <div class="mb-3 col-lg-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >العنوان</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            name=""
+            formControlName="maddress"
+          />
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-danger text-light" [disabled]="!orderForm.valid">حفظ</button>
+  </form>
+</div>

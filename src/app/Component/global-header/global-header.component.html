@@ -1,0 +1,94 @@
+<nav class="navbar navbar-expand-lg bg-white py-0">
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="home"
+            >الرئيسية</a
+          >
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="about">عن شركتنا</a>
+        </li> -->
+        <!-- *ngIf="role!=='admin'"  -->
+        <li class="nav-item" *ngIf="role == 'Merchant'">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="addOrder"
+            >إضافة طلب</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="role !== 'admin'">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="orders"
+            >الطلبات</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="role == 'admin'">
+          <a
+            class="nav-link"
+            routerLinkActive="manoo"
+            routerLink="orderRepositiry"
+            >تقرير الطلبات</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="role == 'admin'">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="employees"
+            >الموظفين</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="role == 'admin'">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="vendors"
+            >التجار</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="role == 'admin'">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="delivaries"
+            >المناديب</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="role == 'admin'">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="governorates"
+            >المحافظات</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="role == 'admin'">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="cities"
+            >إضافة مدينة</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="role == 'admin'">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="branches"
+            >الفروع</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="role == 'admin'">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="weight"
+            >إعدادات الوزن</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="role == 'admin'">
+          <a class="nav-link" routerLinkActive="manoo" routerLink="validation"
+            >الصلاحيات</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logOut()" routerLinkActive="manoo"
+            >تسجيل الخروج</a
+          >
+        </li>
+      </ul>
+    </div>
+    <a class="navbar-brand" routerLink="home">
+      <img src="assets/OIP.jpg" class="logo" alt="logo" />
+    </a>
+  </div>
+</nav>

@@ -1,0 +1,14 @@
+.notFound{
+  background-color: #fff;
+}
+
+
+span{
+  font-size: 60px;
+  font-weight: bold;
+  color:var(--main-danger)
+}
+.info{
+  width:fit-content;
+  height:fit-content;
+}

@@ -1,0 +1,89 @@
+<div class="container p-lg-3 my-3">
+  <div class="white p-3 mb-3">
+    <h3 class="mb-3">تقارير الطلبات حسب الحالة</h3>
+    <form action="" (ngSubmit)="changeData()" [formGroup]="searchForm">
+      <div class="row mb-lg-3">
+        <div class="mb-3 col-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >الحالة</label
+          >
+          <select
+            class="form-select"
+            name="state"
+            formControlName="state"
+            aria-label="Default select example"
+          >
+            <option value="" selected disabled>إختر الحالة</option>
+            <option value="0">جديد</option>
+            <option value="1">قيد الإنتظار</option>
+            <option value="2">تم التسليم للمندوب</option>
+            <option value="3">تم التسليم</option>
+            <option value="4">لا يمكن الوصول</option>
+            <option value="5">تم التأجيل</option>
+            <option value="6">تم التسليم جزئيا</option>
+            <option value="7">تم الإلغاء من قبل المستخدم</option>
+            <option value="8">تم الرفض مع الدفع</option>
+            <option value="9">رفض مع سداد جزء</option>
+            <option value="10">رفض ولم يتم الدفع</option>
+          </select>
+        </div>
+        <div class="mb-3 col-lg-3">
+          <label for="exampleFormControlInput1" class="form-label">من</label>
+          <input
+            type="date"
+            class="form-control"
+            id="exampleFormControlInput1"
+            name="startDate"
+            formControlName="startDate"
+          />
+        </div>
+        <div class="mb-3 col-lg-3">
+          <label for="exampleFormControlInput1" class="form-label">إلى</label>
+          <input
+            type="date"
+            class="form-control"
+            id="exampleFormControlInput1"
+            name="endDate"
+            formControlName="endDate"
+          />
+        </div>
+        <div class="mb-3 col-lg-3">
+          <button class="btn btn-primary text-light mt-2">بحث</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="tableRes d-flex justify-content-center mw-100">
+      <table class="table table-bordered mw-100">
+        <thead>
+          <tr class="table-secondary text-dark text-center">
+            <th scope="col">#</th>
+            <!-- <th scope="col">الحالة</th> -->
+            <th scope="col">العميل</th>
+            <th scope="col">التاجر</th>
+            <th scope="col">رقم الهاتف</th>
+            <th scope="col">المحافظة</th>
+            <th scope="col">المدينة</th>
+            <th scope="col">سعر الطلب</th>
+            <th scope="col">قيمه الشحن</th>
+            <th scope="col">التاريخ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center" *ngFor="let order of orders; let i = index">
+            <td>{{ i + 1 }}</td>
+            <!-- <td>{{order.orderStatus}}</td> -->
+            <td>{{ order.clientName }}</td>
+            <td>{{ order.merchant }}</td>
+            <td>{{ order.firstPhoneNumber }}</td>
+            <td>{{ order.governorate }}</td>
+            <td>{{ order.city }}</td>
+            <td>{{ order.productTotalCost }}</td>
+            <td>{{ order.orderShippingTotalCost }}</td>
+            <td>{{ order.date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

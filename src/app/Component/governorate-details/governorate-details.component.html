@@ -1,0 +1,32 @@
+<div class="container p-lg-3 my-3">
+  <div class="white p-3 mb-3">
+    <h3 class="mb-3">المحافظات</h3>
+      <div>
+        <i class="fa-solid fa-house"></i>
+        <i class="fa-solid fa-angle-left mx-3"></i>
+        <span class="fw-bold">المحافظات</span>
+        <i class="fa-solid fa-angle-left mx-3"></i>
+        <span class="fw-bold">تفاصيل المحافظة</span>
+      </div>
+  </div>
+  <div class="white p-2 p-lg-3 mb-3 d-flex justify-content-center flex-column">
+    <h2>{{gover?.name}}</h2>
+    <div class="tableRes d-flex justify-content-center mw-100">
+      <table class="table table-bordered mw-100">
+        <thead>
+          <tr class="table-secondary text-dark text-center">
+            <th scope="col">#</th>
+            <th scope="col">المدينة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center" *ngFor="let city of gover?.cities;let i = index">
+            <td>{{i+1}}</td>
+            <td>{{city.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

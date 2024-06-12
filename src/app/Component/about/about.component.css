@@ -1,0 +1,89 @@
+.about1{
+  background-color: var(--blue-color);
+  padding-top:110px;
+  padding-bottom:40px;
+}
+.right{
+  position: relative;
+}
+/* .about1Img{
+  max-width: 100%;
+  width:300px;
+} */
+.truck{
+  position: absolute;
+  left:20%;
+  top:50%;
+  z-index: 3;
+  transform: translateY(-50%);
+  max-width: 100%;
+  animation: trans ease-in-out 3s infinite;
+}
+.line{
+  position: absolute;
+  left:20%;
+  top:50%;
+  z-index: 3;
+  transform: translateY(-50%);
+}
+.octa{
+  position: absolute;
+  left:20%;
+  top:50%;
+  transform: translateY(-50%);
+}
+.sky1{
+  position: absolute;
+  left:27%;
+  top:20%;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+.sky2{
+  position: absolute;
+  left:20%;
+  top:10%;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+@keyframes trans{
+  0%{
+    left:20%;
+  }
+  50%{
+    left:0;
+  }
+  100%{
+    left:20%;
+  }
+}
+.left h2{
+  font-size: 44px;
+  font-weight: bolder;
+}
+.left p{
+  font-size: 22px;
+}
+/* -------------------about 2------------------------ */
+
+.about2{
+  padding-top:40px;
+  padding-bottom:40px;
+}
+.about2 h3{
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.about2 h5{
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.about2 p{
+  font-size: 14px;
+  line-height: 1.4;
+}
+.about2 i{
+  font-size: 26px;
+  color:var(--main-danger)
+}
+

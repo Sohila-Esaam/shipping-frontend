@@ -1,0 +1,37 @@
+<div class="container p-3 my-3">
+  <div class="white p-3 mb-3">
+    <h3 class="mb-3">إعدادات الوزن</h3>
+      <div>
+        <i class="fa-solid fa-house"></i>
+        <i class="fa-solid fa-angle-left mx-3"></i>
+        <span class="fw-bold">إعدادات الوزن</span>
+      </div>
+  </div>
+  <div class="white p-2 p-lg-3 mb-3">
+    <h4 class="mb-3">إعدادات تكلفة الشحن الإضافية بالنسبة لوزن الشحنة</h4>
+    <form action="" [formGroup]="weightForm" (ngSubmit)="AddWeight()">
+      <div class="row mb-2 mb-lg-3">
+        <div class="col">
+          <span>تكلفة الشحن الافتراضية (بالجنيه) من 0 كجم إلى وزن</span>
+          <input type="number" class="mx-1 mx-lg-3 p-1 border-secondary" id="exampleFormControlInput" name="defaultWeight" placeholder="تكلفة الشحن الافتراضية" formControlName="defaultWeight" >
+          <span>كجم</span>
+          <div [hidden]="!defaultWeight?.errors || defaultWeight?.untouched">
+            <small class="text-danger" *ngIf="defaultWeight?.errors?.['required']">تكلفة الشحن مطلوبة</small>
+            </div>
+        </div>
+      </div>
+      <div class="row mb-2 mb-lg-3">
+        <div class="col">
+          <span>وسعر كل حجم إضافى بمبلغ (بالجنيه)</span>
+          <input type="number" class="mx-1 mx-lg-3 p-1 border-secondary" id="exampleFormControlInput1" name="additionalPrice" placeholder="تكلفة الكيلو الاضافى" formControlName="additionalPrice" >
+          <span>جنيه</span>
+          <div [hidden]="!additionalPrice?.errors || additionalPrice?.untouched">
+            <small class="text-danger" *ngIf="additionalPrice?.errors?.['required']">تكلفة الشحن الاضافى مطلوبة</small>
+            </div>
+        </div>
+      </div>
+      <button class="btn btn-danger">حفظ</button>
+    </form>
+  </div>
+</div>
+

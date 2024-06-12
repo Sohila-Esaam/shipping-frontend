@@ -1,0 +1,48 @@
+<div class="container p-lg-3 my-3">
+  <div class="white p-3 mb-3">
+    <h3 class="mb-3">إضافة مدينة</h3>
+      <div>
+        <i class="fa-solid fa-house"></i>
+        <i class="fa-solid fa-angle-left mx-3"></i>
+        <span class="fw-bold">إضافة مدينة</span>
+      </div>
+  </div>
+  <div class="white p-2 p-lg-3 mb-3 d-flex justify-content-center flex-column">
+    <form action="" [formGroup]="cityForm" (ngSubmit)="AddCity()">
+      <div class="row">
+        <div class="mb-3 col-lg-3">
+          <label for="exampleFormControlInput1" class="form-label">المحافظة</label>
+          <select class="form-select" name="governorateId" formControlName="governorateId" aria-label="Default select example">
+            <option selected disabled>إختر محافظة</option>
+            <option value={{gover.id}} *ngFor="let gover of governorates">{{gover.name}}</option>
+          </select>
+          <div [hidden]="!governorateId?.errors || governorateId?.untouched">
+            <small class="text-danger" *ngIf="governorateId?.errors?.['required']">إسم المحافظة مطلوب</small>
+            </div>
+        </div>
+        <div class="mb-3 col-lg-3">
+          <label for="exampleFormControlInput1" class="form-label">الاسم</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="إسم المدينة" formControlName="name" >
+          <div [hidden]="!name?.errors || name?.untouched">
+            <small class="text-danger" *ngIf="name?.errors?.['required']">الاسم مطلوب</small>
+            </div>
+        </div>
+        <div class="mb-3 col-lg-3">
+          <label for="exampleFormControlInput1" class="form-label">تكلفة الشحن العادية</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="price" placeholder="" formControlName="price" >
+          <div [hidden]="!price?.errors || price?.untouched">
+            <small class="text-danger" *ngIf="price?.errors?.['required']">التكلفة مطلوبة</small>
+            </div>
+        </div>
+        <div class="mb-3 col-lg-3">
+          <label for="exampleFormControlInput1" class="form-label">تكلفة شحن الpickUp</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="pickup" placeholder="" formControlName="pickup" >
+          <div [hidden]="!pickup?.errors || pickup?.untouched">
+            <small class="text-danger" *ngIf="pickup?.errors?.['required']">تكلفة الpickUp مطلوبة</small>
+            </div>
+        </div>
+      </div>
+      <button [disabled]="cityForm.invalid" class="btn btn-danger text-light">إضافة</button>
+    </form>
+  </div>
+</div>

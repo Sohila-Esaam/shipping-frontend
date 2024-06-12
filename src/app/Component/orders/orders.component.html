@@ -1,0 +1,261 @@
+<div *ngIf="role=='Merchant'" class="container p-lg-3 my-3">
+    <div class="white p-3 mb-3">
+      <ul class="nav nav-underline">
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 0}" (click)="changeMerchantPage(0)">جديد</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 1}" (click)="changeMerchantPage(1)">قيد الانتظار</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 2}" (click)="changeMerchantPage(2)">تم التسليم للمندوب</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 3}" (click)="changeMerchantPage(3)">تم التسليم</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 4}" (click)="changeMerchantPage(4)">لايمكن الوصول</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 5}" (click)="changeMerchantPage(5)">تم التأجيل</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 6}" (click)="changeMerchantPage(6)">تم التسليم جزئيا</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 7}" (click)="changeMerchantPage(7)">تم الإلغاء من قبل المستلم</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 8}" (click)="changeMerchantPage(8)">تم الرفض مع الدفع</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 9}" (click)="changeMerchantPage(9)">رفض مع سداد جزئ</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 10}" (click)="changeMerchantPage(10)">رفض ولم يتم الدفع</a></li>
+      </ul>
+    </div>
+      <div *ngIf="pageContent.length!=0" class="white p-2 p-lg-3 mb-3 d-flex justify-content-center flex-column">
+        <!-- <div class="mb-3 d-flex justify-content-center">
+          <button class="btn btn-primary ms-2">بحث</button>
+          <input type="text" name="" placeholder="بحث" class="form-control" style="max-width: 200px;"/>
+        </div> -->
+        <div class="tableRes d-flex justify-content-center mw-100">
+          <table class="table table-bordered mw-100">
+            <thead>
+              <tr class="table-secondary text-dark text-center">
+                <th scope="col">#</th>
+                <th scope="col">التاريخ</th>
+                <th scope="col">بيانات العميل</th>
+                <th scope="col">المحافظة</th>
+                <th scope="col">المدينة</th>
+                <th scope="col">تكلفة الطلب</th>
+                <th scope="col">تعديل الطلب</th>
+                <th scope="col">حذف</th>
+                <th scope="col">طباعه</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center" *ngFor="let item of pageContent ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.clientName}}</td>
+                <td>{{item.governorate}}</td>
+                <td>{{item.city}}</td>
+                <td>{{item.cost}}</td>
+                <td>
+                  <button class="btn btn-success mx-1"><i class="fa-solid fa-pencil"></i></button>
+                </td>
+                  <td>
+                    <button class="btn btn-danger mx-1" (click)="delete(item.id)"><i class="fa-regular fa-trash-can"></i></button>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary mx-1"><i class="fa-solid fa-print"></i></button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="pageContent.length==0" class="white p-2 p-lg-5 mb-3 d-flex justify-content-center">
+          <h2 style="color:red;font-weight: bold;">لا يوجد طلبات فى هذه الحالة</h2>
+      </div>
+</div>
+<!-- ................................................................................. -->
+<div *ngIf="role=='Employee'" class="container p-lg-3 my-3">
+    <div class="white p-3 mb-3">
+      <ul class="nav nav-underline">
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 0}" (click)="changeEmployeePage(0)">جديد</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 1}" (click)="changeEmployeePage(1)">قيد الانتظار</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 2}" (click)="changeEmployeePage(2)">تم التسليم للمندوب</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 3}" (click)="changeEmployeePage(3)">تم التسليم</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 4}" (click)="changeEmployeePage(4)">لايمكن الوصول</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 5}" (click)="changeEmployeePage(5)">تم التأجيل</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 6}" (click)="changeEmployeePage(6)">تم التسليم جزئيا</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 7}" (click)="changeEmployeePage(7)">تم الإلغاء من قبل المستلم</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 8}" (click)="changeEmployeePage(8)">تم الرفض مع الدفع</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 9}" (click)="changeEmployeePage(9)">رفض مع سداد جزئ</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 10}" (click)="changeEmployeePage(10)">رفض ولم يتم الدفع</a></li>
+      </ul>
+    </div>
+      <div *ngIf="pageContent.length!=0" class="white p-2 p-lg-3 mb-3 d-flex justify-content-center flex-column">
+        <!-- <div class="mb-3 d-flex justify-content-center">
+          <button class="btn btn-primary ms-2">بحث</button>
+          <input type="text" name="" placeholder="بحث" class="form-control" style="max-width: 200px;"/>
+        </div> -->
+        <div class="tableRes d-flex justify-content-center mw-100">
+          <table class="table table-bordered mw-100">
+            <thead>
+              <tr class="table-secondary text-dark text-center">
+                <th scope="col">#</th>
+                <th scope="col">التاريخ</th>
+                <th scope="col">بيانات العميل</th>
+                <th scope="col">المحافظة</th>
+                <th scope="col">المدينة</th>
+                <th scope="col">تكلفة الطلب</th>
+                <th scope="col">الإسناد لمندوب</th>
+                <th scope="col">تغيير الحالة</th>
+                <th scope="col">حذف</th>
+                <th scope="col">طباعه</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center" *ngFor="let item of pageContent ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.clientName}}</td>
+                <td>{{item.governorate}}</td>
+                <td>{{item.city}}</td>
+                <td>{{item.cost}}</td>
+                <td>
+                  <button class="btn btn-success mx-1" (click)="openRepresent(item.id)">إختيار مندوب</button>
+                </td>
+                <td>
+                  <button class="btn btn-success mx-1" (click)="openStatus(item.id)">الحالة</button>
+                </td>
+                  <td>
+                    <button class="btn btn-danger mx-1" (click)="delete(item.id)"><i class="fa-regular fa-trash-can"></i></button>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary mx-1"><i class="fa-solid fa-print"></i></button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="pageContent.length==0" class="white p-2 p-lg-5 mb-3 d-flex justify-content-center">
+          <h2 style="color:red;font-weight: bold;">لا يوجد طلبات فى هذه الحالة</h2>
+      </div>
+</div>
+  
+<!-- ................................................................................. -->
+<div *ngIf="role=='Representative'" class="container p-lg-3 my-3">
+    <div class="white p-3 mb-3">
+      <ul class="nav nav-underline">
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 0}" (click)="changeRepresentativePage(0)">تم التسليم</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 1}" (click)="changeRepresentativePage(1)">لايمكن الوصول</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 2}" (click)="changeRepresentativePage(2)">تم التأجيل</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 3}" (click)="changeRepresentativePage(3)">تم التسليم جزئيا</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 4}" (click)="changeRepresentativePage(4)">تم الإلغاء من قبل المستلم</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 5}" (click)="changeRepresentativePage(5)">تم الرفض مع الدفع</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 6}" (click)="changeRepresentativePage(6)">رفض مع سداد جزئ</a></li>
+        <li class="nav-item"><a class="nav-link" [ngClass]="{'active': activeIndex === 7}" (click)="changeRepresentativePage(7)">رفض ولم يتم الدفع</a></li>
+      </ul>
+    </div>
+      <div *ngIf="pageContent.length!=0" class="white p-2 p-lg-3 mb-3 d-flex justify-content-center flex-column">
+        <!-- <div class="mb-3 d-flex justify-content-center">
+          <button class="btn btn-primary ms-2">بحث</button>
+          <input type="text" name="" placeholder="بحث" class="form-control" style="max-width: 200px;"/>
+        </div> -->
+        <div class="tableRes d-flex justify-content-center mw-100">
+          <table class="table table-bordered mw-100">
+            <thead>
+              <tr class="table-secondary text-dark text-center">
+                <th scope="col">#</th>
+                <th scope="col">التاريخ</th>
+                <th scope="col">بيانات العميل</th>
+                <th scope="col">المحافظة</th>
+                <th scope="col">المدينة</th>
+                <th scope="col">تكلفة الطلب</th>
+                <th scope="col">تغيير الحالة</th>
+                <th scope="col">حذف</th>
+                <th scope="col">طباعه</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center" *ngFor="let item of pageContent ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.clientName}}</td>
+                <td>{{item.governorate}}</td>
+                <td>{{item.city}}</td>
+                <td>{{item.cost}}</td>
+                <td>
+                  <button class="btn btn-success mx-1" (click)="openStatus(item.id)">الحالة</button>
+                </td>
+                  <td>
+                    <button class="btn btn-danger mx-1" (click)="delete(item.id)"><i class="fa-regular fa-trash-can"></i></button>
+                  </td>
+                  <td>
+                    <button class="btn btn-primary mx-1"><i class="fa-solid fa-print"></i></button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="pageContent.length==0" class="white p-2 p-lg-5 mb-3 d-flex justify-content-center">
+          <h2 style="color:red;font-weight: bold;">لا يوجد طلبات فى هذه الحالة</h2>
+      </div>
+      
+</div>
+  
+
+<!-- ................................................................................. -->
+
+<div *ngIf="role=='Employee'" class="prompt" [ngClass]="{'active': showStatusprompt == true}">
+  <form action="" [formGroup]="EmployeeForm" (ngSubmit)="EmployeecahngeStatus()">
+
+  <div class="row">
+    <div class="mb-3 col">
+      <label for="exampleFormControlInput1" class="form-label">الحالة</label>
+      <select class="form-select" name="statusId" formControlName="statusId" aria-label="Default select example">
+        <option value='' selected disabled>إختر الحالة</option>
+        <option value="1">قيد الإنتظار</option>
+        <option value="2">تم التسليم للمندوب</option>
+      </select>
+    </div>
+
+  </div>
+  <!--   <button [disabled]="cityForm.invalid" class="btn btn-danger text-light">إضافة</button> -->
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-success text-light">تغيير</button>
+  <button (click)="closeStatus()" class="btn btn-danger text-light">تراجع</button>
+  </div>
+</form>
+</div>
+<div *ngIf="role=='Employee'" class="prompt" [ngClass]="{'active': showrepresprompt == true}">
+  <form action="" [formGroup]="EmpRepForm" (ngSubmit)="AssignOrdertoRes()">
+
+  <div class="row">
+    <div class="mb-3 col">
+      <label for="exampleFormControlInput1" class="form-label">المندوب</label>
+          <select class="form-select" name="repId" formControlName="repId" aria-label="Default select example">
+            <option value="" selected disabled>إختر مندوب</option>
+            <option value={{rep.id}} *ngFor="let rep of representatives">{{rep.name}}</option>
+          </select>
+    </div>
+
+  </div>
+  <!--   <button [disabled]="cityForm.invalid" class="btn btn-danger text-light">إضافة</button> -->
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-success text-light">إسناد</button>
+  <button (click)="closereps()" class="btn btn-danger text-light">تراجع</button>
+  </div>
+</form>
+</div>
+<div *ngIf="role=='Representative'" class="prompt" [ngClass]="{'active': showStatusprompt == true}">
+  <form action="" [formGroup]="EmployeeForm" (ngSubmit)="RepresentativecahngeStatus()">
+  <div class="row">
+    <div class="mb-3 col">
+      <label for="exampleFormControlInput1" class="form-label">الحالة</label>
+      <select class="form-select" name="statusId" formControlName="statusId" aria-label="Default select example">
+        <option value='' selected disabled>إختر الحالة</option>
+        <option value="3">تم التسليم</option>
+        <option value="4">لا يمكن الوصول</option>
+        <option value="5">تم التأجيل</option>
+        <option value="6">تم التسليم جزئيا</option>
+        <option value="7">تم الإلغاء من قبل المستلم</option>
+        <option value="8">تم الرفض مع الدفع</option>
+        <option value="9">رفض مع سداد جزء</option>
+        <option value="10">رفض ولم يتم الدفع</option>
+      </select>
+    </div>
+  </div>
+  <!--   <button [disabled]="cityForm.invalid" class="btn btn-danger text-light">إضافة</button> -->
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-success text-light">تغيير</button>
+  <button (click)="closeStatus()" class="btn btn-danger text-light">تراجع</button>
+  </div>
+</form>
+</div>

@@ -1,0 +1,65 @@
+<div class="container p-lg-3 my-3">
+  <div class="white p-3 mb-3">
+    <h3 class="mb-3">الفروع</h3>
+    <div class="d-flex justify-content-between">
+      <div>
+        <i class="fa-solid fa-house"></i>
+        <i class="fa-solid fa-angle-left mx-3"></i>
+        <span class="fw-bold">الفروع</span>
+    </div>
+      <button class="btn btn-primary" (click)="btnClick()">{{btnText}}</button>
+    </div>
+  </div>
+  <div [hidden]="!flag" class="white p-3 mb-3">
+    <form action="" [formGroup]="branchForm" (ngSubmit)="AddBranch()">
+      <div class="row">
+        <div class="mb-3 col-lg-3">
+          <label for="exampleFormControlInput1" class="form-label">إسم الفرع</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="الاسم" formControlName="name" >
+          <div [hidden]="!name?.errors || name?.untouched">
+            <small class="text-danger" *ngIf="name?.errors?.['required']">إسم الفرع مطلوب</small>
+            </div>
+        </div>
+      </div>
+      <button [disabled]="branchForm.invalid" class="btn btn-danger text-light">إضافة</button>
+    </form>
+  </div>
+  <div class="white p-2 p-lg-3 mb-3 d-flex justify-content-center flex-column">
+    <div class="mb-3 d-flex justify-content-center">
+      <button class="btn btn-primary ms-2">بحث</button>
+      <input type="text" name="" placeholder="بحث" class="form-control" style="max-width: 200px;"/>
+    </div>
+    <div class="tableRes d-flex justify-content-center mw-100">
+      <table class="table table-bordered mw-100">
+        <thead>
+          <tr class="table-secondary text-dark text-center">
+            <th scope="col">#</th>
+            <th scope="col">الاسم</th>
+            <th scope="col">تاريخ الانشاء</th>
+            <th scope="col">الحالة</th>
+            <th scope="col">الاعدادات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center" *ngFor="let branch of branches;let i = index">
+            <td>{{i+1}}</td>
+            <td>{{branch.name}}</td>
+            <td>{{branch.dateTime}}</td>
+            <td>
+              <div class="form-check form-switch d-flex align-items-center justify-content-center">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [checked]="!branch.isDeleted">
+              </div>
+            </td>
+            <td>
+              <button class="btn btn-primary mx-1" (click)="GoToBranchDetails(1)"><i class="fa-solid fa-eye"></i></button>
+              <button class="btn btn-danger mx-1" (click)="deleteBranch(1)"><i class="fa-regular fa-trash-can"></i></button>
+              <button class="btn btn-success mx-1"><i class="fa-solid fa-pencil"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
